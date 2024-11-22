@@ -45,8 +45,6 @@ public class AnimationController : MonoBehaviour
             anim.SetTrigger(temp);
             return;
         }
-
         anim.SetBool(temp, true);
     }
-
 }

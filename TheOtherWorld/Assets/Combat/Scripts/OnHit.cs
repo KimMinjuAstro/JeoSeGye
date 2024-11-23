@@ -12,5 +12,8 @@ public class OnHit : MonoBehaviour
         maxHp = hp;
     }
 
-
+    public void TakeDamage(float dmg)
+    { 
+        hp -= dmg;
+    }
 }

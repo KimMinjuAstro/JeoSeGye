@@ -2,32 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeDamage : Weapon 
+public class BulletDamage : MonoBehaviour
 {
-    public float dmg = 0f;
-    private Collider2D cd;
+    private float dmg;
 
-    private void Awake()
+    public void Init(float dmg)
     {
-        cd = GetComponent<Collider2D>();
-    }
-
-    private void OnEnable()
-    {
-        cd.enabled = true;
-    }
-
-    private void OnDisable()
-    {
-        cd.enabled = false;
+        this.dmg = dmg;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent<OnHit>(out OnHit hit))
-        { 
+        {
             hit.TakeDamage(dmg);
             hit.GetComponentInChildren<HpBar>().HpBarDamage();
+            Destroy(gameObject);
         }
     }
 }

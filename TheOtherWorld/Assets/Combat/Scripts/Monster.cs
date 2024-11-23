@@ -9,6 +9,7 @@ public class Monster : MonoBehaviour
     public float attackSpeed = 1.0f;
     public float targetRange = 1.0f;
 
+    float mapCount = 1;
     bool isAttack = false;
     private Animator anim;
 
@@ -17,6 +18,7 @@ public class Monster : MonoBehaviour
 
     private void Start()
     {
+        TargetManager.instance.monsters.Add(this);
         Player = PlayerManager.instance.Player;
         anim = GetComponent<Animator>();
     }
@@ -27,8 +29,19 @@ public class Monster : MonoBehaviour
 
         if (Vector3.Distance(transform.position, Player.transform.position) > 0.5f)
         {
-            //이동
-            transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, Time.deltaTime * moveSpeed);
+            if (mapCount == 1)
+            {
+                if (Vector3.Distance(transform.position, Player.transform.position) < targetRange)
+                {
+                    //이동
+                    transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, Time.deltaTime * moveSpeed);
+                }
+            }
+            else
+            { 
+                //이동
+                transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, Time.deltaTime * moveSpeed);
+            }
         }
         else
         {

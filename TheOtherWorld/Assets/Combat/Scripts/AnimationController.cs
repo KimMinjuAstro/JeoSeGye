@@ -13,8 +13,6 @@ public class AnimationController : MonoBehaviour
     private float baseAttackTimer = 0f;
     private bool isAttack;
 
-    public List<Weapon> weapons = new List<Weapon>();
-
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -47,7 +45,6 @@ public class AnimationController : MonoBehaviour
         {
             baseAttackTimer = 0f;
             anim.SetTrigger("isAttack");
-
         }
 
         if (!isAttack)

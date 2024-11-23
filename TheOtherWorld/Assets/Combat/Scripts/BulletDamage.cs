@@ -18,8 +18,10 @@ public class BulletDamage : MonoBehaviour
             hit.TakeDamage(dmg);
             hit.GetComponentInChildren<HpBar>().HpBarDamage();
             transform.GetComponent<FireBall>().Attack();
+
             if (transform.GetComponent<FireBall>() != null)
             {
+                transform.position = hit.transform.position;    
                 transform.GetComponent<FireBall>().Attack();
             }
         }

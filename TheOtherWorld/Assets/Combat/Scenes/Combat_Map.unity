@@ -794,11 +794,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  windStorm: 0
-  moon: 0
-  darknessExplosion: 0
-  fireArrow: 0
-  iceArrow: 0
+  windStorm: 1
+  moon: 1
+  darknessExplosion: 1
+  fireArrow: 1
+  iceArrow: 1
   fireBall: 1
   windStormPrefabs: {fileID: 3276315854339165819, guid: 8233082ef19cea24890c78aa273e3f27, type: 3}
   windStormDuration: 2
@@ -821,7 +821,7 @@ MonoBehaviour:
   isTorome: 0
   toromeDmg: 10
   firePrefabs: {fileID: 3602400706418099826, guid: 3e7030e7b2cf07049b3d21289e5c3234, type: 3}
-  fireDuration: 1
+  fireDuration: 2
   fireTimer: 0
   isFire: 0
   fireDmg: 10

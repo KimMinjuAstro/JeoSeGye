@@ -85,6 +85,81 @@ public class SkillManager : MonoBehaviour
         {
             Skill_Fire2();
         }
+
+        if (fireArrow)
+        {
+            Skill_Fire();
+        }
+
+        if (darknessExplosion)
+        {
+            Skill_DarknessExplosion();
+        }
+    }
+
+    private void Skill_DarknessExplosion()
+    {
+        toromeTimer += Time.deltaTime;
+
+        if (toromeTimer >= toromeDuration)
+        {
+            if (isTorome) return;
+
+            isTorome = true;
+            StartCoroutine(ToromeEnd());
+
+            if (monsters.Length <= 0)
+            {
+                Debug.Log("근처에 적이 없음");
+                return;
+            }
+
+            Monster monster = FindClosestTarget();
+
+            Vector2 direction = (monster.transform.position - player.transform.position).normalized;
+            var go = Instantiate(toromePrefabs, player.transform.position, Quaternion.identity);
+
+            // 발사체 회전 설정 (적 방향으로)
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 각도 계산
+            go.transform.rotation = Quaternion.Euler(0, 0, angle);
+            go.GetComponent<BulletDamage>().Init(fireDmg);
+
+            toromeTimer = 0;
+
+        }
+    }
+
+    private void Skill_Fire()
+    {
+        fireTimer += Time.deltaTime;
+
+        if (fireTimer >= fireDuration)
+        {
+            if (isFire) return;
+
+            isFire = true;
+            StartCoroutine(FireEnd());
+
+            if (monsters.Length <= 0)
+            {
+                Debug.Log("근처에 적이 없음");
+                return;
+            }
+
+            Monster monster = FindClosestTarget();
+
+            Vector2 direction = (monster.transform.position - player.transform.position).normalized;
+
+            var go = Instantiate(firePrefabs, player.transform.position, Quaternion.identity);
+
+            // 발사체 회전 설정 (적 방향으로)
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 각도 계산
+            go.transform.rotation = Quaternion.Euler(0, 0, angle);
+            go.GetComponent<BulletDamage>().Init(fireDmg);
+
+            fireTimer = 0;
+
+        }
     }
 
     private void Skill_Fire2()
@@ -118,6 +193,19 @@ public class SkillManager : MonoBehaviour
             fire2Timer = 0;
 
         }
+    }
+
+    private IEnumerator ToromeEnd()
+    {
+        yield return new WaitForSeconds(.3f);
+        isTorome = false;
+    }
+
+
+    private IEnumerator FireEnd()
+    {
+        yield return new WaitForSeconds(.3f);
+        isFire = false;
     }
 
     private void Skill_IceArrow()
@@ -191,7 +279,7 @@ public class SkillManager : MonoBehaviour
         foreach (Monster target in monsters)
         {
             float distance = Vector2.Distance(player.transform.position, target.transform.position);
-            Debug.Log($"몬스터: {target.name}, 거리: {distance}");
+            //Debug.Log($"몬스터: {target.name}, 거리: {distance}");
             if (distance < minDistance)
             {
                 minDistance = distance;
@@ -235,7 +323,7 @@ public class SkillManager : MonoBehaviour
     private IEnumerator IceFire2()
     {
         yield return new WaitForSeconds(.3f);
-        isFire2 = false;
+        isFire = false;
     }
 
     private IEnumerator IceEnd()

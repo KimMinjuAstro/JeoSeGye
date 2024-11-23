@@ -1,36 +1,88 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class QuestPopUpHandler : MonoBehaviour
 {
     public float targetScale = 4.182f;
     public float shrinkRate = 0.1f;
 
-    private GameObject commonUI;
+    public GameObject commonUI;
+    public GiftPopUpHandler giftPopUpWindow;
+
+    [FormerlySerializedAs("questPopUp")] public QuestPopUpHandler questWindow;
+    public TextMeshProUGUI questTitle;
+    public TextMeshProUGUI questDetail;
+    public TextMeshProUGUI giftNum;
+    public Button clearButton;
     
-    void Start()
+    [Header("퀘스트 Type과 Index")]
+    public int questType = 0;
+    public int questIdx = 0;
+    
+    
+    
+    
+    void Awake()
     {      
         DOTween.Init();
-        // transform 의 scale 값을 모두 0.1f로 변경합니다.
         transform.localScale = Vector3.one * 0.1f;
-        // 객체를 비활성화 합니다.
         gameObject.SetActive(false);
-
-        commonUI = GameObject.Find("CommonUI");
+        clearButton.onClick.AddListener(OnClickClearButton);
     }
 
+    private void Start()
+    {
+        QuestApply(questType, questIdx);
+
+    }
+
+    public void QuestApply(int type, int idx)
+    {
+        // 타입에 따른 퀘스트들 모두 불러옴
+        List<QuestData> typeQuestList = QuestSystem.Instance.GetQuestsByType(type);
+
+        // 리스트가 비어있거나 null인지 먼저 체크
+        if (typeQuestList == null || typeQuestList.Count == 0)
+        {
+            Debug.Log($"Type {type}에 해당하는 퀘스트가 없습니다.");
+            return;
+        }
+
+        // 퀘스트 완료될 때마다 카운트
+        int completedQuestNum = 0;
+
+        if (idx < typeQuestList.Count)
+        {
+            questTitle.text = $"{type} Map {typeQuestList[idx].QuestIndex} Title";
+            questDetail.text = $"{type} Map {typeQuestList[idx].QuestIndex} Detail"+"\n"+$"Reward : {typeQuestList[idx].QuestExp}";
+            giftNum.text = $"x {typeQuestList[idx].QuestGiftNumber}";
+        }
+        else
+        {
+            Debug.Log($"idx({idx})가 퀘스트 리스트 크기({typeQuestList.Count})를 벗어났습니다. type {type}에 맞는 퀘스트 완료");
+        }
+    }
+
+    public void OnClickClearButton()
+    {
+        var seq = DOTween.Sequence();
+        seq.Play().OnComplete(() => {
+            giftPopUpWindow.Show();
+        });
+    }
+    
+    
+    
     public void Show()
     {
-        // 활성화 여부 확인 및 초기화
-        if (!gameObject.activeSelf)
-        {
-            gameObject.SetActive(true);
-        }
-        
         commonUI.SetActive(false);
+        gameObject.SetActive(true);
         
         transform.localScale = Vector3.one * 0.1f; // 초기 크기 설정
 
@@ -42,9 +94,9 @@ public class QuestPopUpHandler : MonoBehaviour
         seq.Append(transform.DOScale(targetScale, 0.1f));
 
         seq.Play();
-    }
+    }   // 퀘스트 팝업창 보이기
 
-    public void Hide()
+    public void Hide()      // 퀘스트 팝업창 숨기기
     {
         
         commonUI.SetActive(true);
@@ -64,4 +116,6 @@ public class QuestPopUpHandler : MonoBehaviour
             gameObject.SetActive(false);
         });
     }
+    
+    
 }

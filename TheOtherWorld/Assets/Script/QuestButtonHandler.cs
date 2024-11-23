@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class QuestButtonHandler : MonoBehaviour
 {
-    public QuestPopUpHandler popupWindow;
+    public QuestPopUpHandler questPopUp;
 
     public void OnButtonClick()
     {      
@@ -19,7 +20,7 @@ public class QuestButtonHandler : MonoBehaviour
         seq.Append(transform.DOScale(originScale, 0.1f));
 
         seq.Play().OnComplete(() => {
-            popupWindow.Show();
+            questPopUp.Show();
         });
     }
 }

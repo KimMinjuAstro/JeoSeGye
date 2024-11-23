@@ -17,14 +17,45 @@ public class CharacterData
 
 public class CharacterLevelSystem : MonoBehaviour
 {
+    private static CharacterLevelSystem instance;
+    public static CharacterLevelSystem Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                // Scene에서 찾아보기
+                instance = FindObjectOfType<CharacterLevelSystem>();
+                
+                // Scene에 없다면 새로 생성
+                if (instance == null)
+                {
+                    GameObject go = new GameObject("CharacterLevelSystem");
+                    instance = go.AddComponent<CharacterLevelSystem>();
+                }
+            }
+            return instance;
+        }
+    }
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);    // 중복된 인스턴스 제거
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);  // 씬 전환시에도 유지
+        
+        LoadCharacterData();
+    }
+    
+    
     private List<CharacterData> characterDataList;
     private CharacterData currentCharacter;
     private int currentExp = 0;
-
-    void Awake()
-    {
-        LoadCharacterData();
-    }
 
     private void LoadCharacterData()
     {

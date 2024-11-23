@@ -798,14 +798,14 @@ MonoBehaviour:
   moon: 0
   darknessExplosion: 0
   fireArrow: 0
-  iceArrow: 1
-  fireBall: 0
+  iceArrow: 0
+  fireBall: 1
   windStormPrefabs: {fileID: 3276315854339165819, guid: 8233082ef19cea24890c78aa273e3f27, type: 3}
   windStormDuration: 2
   windStormTimer: 0
   isWindStorm: 0
   windStormDmg: 10
-  moonPrefabs: {fileID: 0}
+  moonPrefabs: {fileID: 8884861816924298183, guid: 0609f14df9b22cb4e8850f48c38eb4fb, type: 3}
   moonDuration: 1
   moonTimer: 0
   isMoon: 0
@@ -815,6 +815,21 @@ MonoBehaviour:
   iceTimer: 0
   isIce: 0
   iceDmg: 10
+  toromePrefabs: {fileID: 6722778453397133709, guid: 91523079aa9dacf4e89565f4abd00d72, type: 3}
+  toromeDuration: 1
+  toromeTimer: 0
+  isTorome: 0
+  toromeDmg: 10
+  firePrefabs: {fileID: 3602400706418099826, guid: 3e7030e7b2cf07049b3d21289e5c3234, type: 3}
+  fireDuration: 1
+  fireTimer: 0
+  isFire: 0
+  fireDmg: 10
+  fire2Prefabs: {fileID: 3827881504251722451, guid: 0177935857ab7e14babeed1a3d047a1e, type: 3}
+  fire2Duration: 0.7
+  fire2Timer: 0
+  isFire2: 0
+  fire2Dmg: 10
 --- !u!1 &630295900
 GameObject:
   m_ObjectHideFlags: 0
@@ -8176,9 +8191,9 @@ Transform:
   m_GameObject: {fileID: 806293481}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.18, y: 3.21, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0.13, y: 3.8, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1343554307}
   - {fileID: 1674397395}
@@ -8210,7 +8225,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &811230164
 GameObject:
   m_ObjectHideFlags: 0
@@ -9873,9 +9888,9 @@ Transform:
   m_GameObject: {fileID: 1876395331}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.669, y: 1.841, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 1.17, y: 1.841, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1672871177}
   - {fileID: 1505086132}
@@ -9982,7 +9997,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &1951237154
 GameObject:
   m_ObjectHideFlags: 0
@@ -10478,8 +10493,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.67, y: 1.841, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 770777044}
   - {fileID: 835183636}
@@ -10511,7 +10526,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &374781148020971742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10544,8 +10559,8 @@ Transform:
   m_GameObject: {fileID: 5258501051455106856}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.17, y: -4.55, z: 0}
-  m_LocalScale: {x: 1.3978634, y: 1.4795895, z: 1}
+  m_LocalPosition: {x: 0.255, y: -2.819, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7828596615038151358}
@@ -11090,5 +11105,5 @@ SceneRoots:
   - {fileID: 1819081501}
   - {fileID: 811230165}
   - {fileID: 1509081503}
-  - {fileID: 624984691}
   - {fileID: 1342673236}
+  - {fileID: 624984691}

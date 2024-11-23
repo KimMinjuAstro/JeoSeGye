@@ -39,6 +39,28 @@ public class SkillManager : MonoBehaviour
     public bool isIce = false;
     public float iceDmg = 10f;
 
+    [Header("다크")]
+    public GameObject toromePrefabs;
+    public float toromeDuration = 1.0f;
+    public float toromeTimer = 0.0f;
+    public bool isTorome = false;
+    public float toromeDmg = 10f;
+
+    [Header("파이어")]
+    public GameObject firePrefabs;
+    public float fireDuration = 1.0f;
+    public float fireTimer = 0.0f;
+    public bool isFire = false;
+    public float fireDmg = 10f;
+
+    [Header("파이어2")]
+    public GameObject fire2Prefabs;
+    public float fire2Duration = 1.0f;
+    public float fire2Timer = 0.0f;
+    public bool isFire2 = false;
+    public float fire2Dmg = 10f;
+
+
     private void Start()
     {
         player = PlayerManager.instance.Player;
@@ -57,6 +79,44 @@ public class SkillManager : MonoBehaviour
         if (iceArrow)
         {
             Skill_IceArrow();
+        }
+
+        if (fireBall)
+        {
+            Skill_Fire2();
+        }
+    }
+
+    private void Skill_Fire2()
+    {
+        fire2Timer += Time.deltaTime;
+
+        if (fire2Timer >= fire2Duration)
+        {
+            if (isFire2) return;
+
+            isFire2 = true;
+            StartCoroutine(IceFire2());
+
+            if (monsters.Length <= 0)
+            {
+                Debug.Log("근처에 적이 없음");
+                return;
+            }
+
+            Monster monster = FindClosestTarget();
+
+            Vector2 direction = (monster.transform.position - player.transform.position).normalized;
+
+            var go = Instantiate(fire2Prefabs, player.transform.position, Quaternion.identity);
+
+            // 발사체 회전 설정 (적 방향으로)
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 각도 계산
+            go.transform.rotation = Quaternion.Euler(0, 0, angle);
+            go.GetComponent<BulletDamage>().Init(fire2Dmg);
+
+            fire2Timer = 0;
+
         }
     }
 
@@ -130,7 +190,8 @@ public class SkillManager : MonoBehaviour
 
         foreach (Monster target in monsters)
         {
-            float distance = Vector2.Distance(transform.position, target.transform.position);
+            float distance = Vector2.Distance(player.transform.position, target.transform.position);
+            Debug.Log($"몬스터: {target.name}, 거리: {distance}");
             if (distance < minDistance)
             {
                 minDistance = distance;
@@ -138,7 +199,6 @@ public class SkillManager : MonoBehaviour
             }
         }
 
-        Debug.Log("??" + minDistance);
         return closest;
     }
 
@@ -170,6 +230,12 @@ public class SkillManager : MonoBehaviour
 
             StartCoroutine(WindStormEnd());
         }
+    }
+
+    private IEnumerator IceFire2()
+    {
+        yield return new WaitForSeconds(.3f);
+        isFire2 = false;
     }
 
     private IEnumerator IceEnd()

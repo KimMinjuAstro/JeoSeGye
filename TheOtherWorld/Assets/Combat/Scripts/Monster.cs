@@ -11,7 +11,9 @@ public class Monster : MonoBehaviour
 
     float mapCount = 1;
     bool isAttack = false;
+    bool isDead = false;
     private Animator anim;
+
 
     public GameObject weapon;
     //public List<Weapon> weapon = new List<Weapon>();
@@ -26,6 +28,19 @@ public class Monster : MonoBehaviour
     private void Update()
     {
         if (Player == null) return;
+        if (isDead) return;
+
+        bool isFacingLeft = transform.localScale.x < 0;
+
+        // 플레이어가 왼쪽에 있을 때 방향 변경
+        if (Player.transform.position.x > transform.position.x && !isFacingLeft)
+        {
+            transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
+        }
+        else if (Player.transform.position.x <= transform.position.x && isFacingLeft)
+        {
+            transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
+        }
 
         if (Vector3.Distance(transform.position, Player.transform.position) > 0.5f)
         {

@@ -17,7 +17,12 @@ public class BulletDamage : MonoBehaviour
         {
             hit.TakeDamage(dmg);
             hit.GetComponentInChildren<HpBar>().HpBarDamage();
-            Destroy(gameObject);
+            transform.GetComponent<FireBall>().Attack();
+            if (transform.GetComponent<FireBall>() != null)
+            {
+                transform.GetComponent<FireBall>().Attack();
+            }
         }
     }
 }
+

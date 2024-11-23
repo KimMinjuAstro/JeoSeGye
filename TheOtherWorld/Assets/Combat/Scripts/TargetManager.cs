@@ -53,11 +53,11 @@ public class TargetManager : MonoBehaviour
         }
 
         // ¸®½ºÆ® ³»¿ë µð¹ö±× Ãâ·Â
-        Debug.Log("Å½ÁöµÈ Å¸°Ù ¼ö: " + monsters.Count);
+        //Debug.Log("Å½ÁöµÈ Å¸°Ù ¼ö: " + monsters.Count);
 
         foreach(Monster target in monsters)
         {
-            Debug.Log("Å½ÁöµÈ Å¸°Ù: " + target.name);
+            //Debug.Log("Å½ÁöµÈ Å¸°Ù: " + target.name);
         }
     }
 

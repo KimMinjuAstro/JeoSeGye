@@ -7,8 +7,13 @@ public class Monster : MonoBehaviour
     private PlayerController Player;
     public float moveSpeed = 1.5f;
     public float attackSpeed = 1.0f;
+    public float targetRange = 1.0f;
+
     bool isAttack = false;
     private Animator anim;
+
+    public GameObject weapon;
+    //public List<Weapon> weapon = new List<Weapon>();
 
     private void Start()
     {
@@ -30,18 +35,20 @@ public class Monster : MonoBehaviour
             if(!isAttack)
             {
                 isAttack = true;
+                weapon.SetActive(true);
+                weapon.GetComponent<Collider2D>().enabled = true;
                 //АјАн
                 anim.SetTrigger("isAttack");
                 Invoke("AttackSpeed", attackSpeed);
             }
 
         }
-
-
     }
 
     private void AttackSpeed()
     {
+        weapon.SetActive(false);
+        weapon.GetComponent<Collider2D>().enabled = false;
         isAttack = false;
     }
 }

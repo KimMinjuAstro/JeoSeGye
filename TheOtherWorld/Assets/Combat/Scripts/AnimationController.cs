@@ -7,6 +7,13 @@ public class AnimationController : MonoBehaviour
 {
     Animator anim;
     PlayerController pc;
+    public GameObject baseAttack;
+    
+    public float baseAttackSpeed = 1f;
+    private float baseAttackTimer = 0f;
+    private bool isAttack;
+
+    public List<Weapon> weapons = new List<Weapon>();
 
     private void Start()
     {
@@ -14,22 +21,56 @@ public class AnimationController : MonoBehaviour
         pc = GetComponent<PlayerController>();
     }
 
+    public void AttackStart()
+    { 
+        isAttack = true;
+        baseAttack.gameObject.SetActive(true);
+    }
+
+    public void AttackEnd()
+    { 
+        isAttack = false;
+        baseAttack.gameObject.SetActive(false);
+    }
+
     private void Update()
     {
-        if (pc.dir == Vector3.zero)
+        Animation_Controller();
+        Filp();
+    }
+
+    private void Animation_Controller()
+    {
+        baseAttackTimer += Time.deltaTime;
+
+        if (baseAttackTimer >= baseAttackSpeed)
         {
-            AnimationChange("isIDLE");
-        }
-        else
-        {
-            AnimationChange("isMOVE");
+            baseAttackTimer = 0f;
+            anim.SetTrigger("isAttack");
+
         }
 
+        if (!isAttack)
+        { 
+            if (pc.dir == Vector3.zero)
+            {
+                AnimationChange("isIDLE");
+            }
+            else
+            {
+                AnimationChange("isMOVE");
+            }        
+        }
+
+    }
+
+    private void Filp()
+    {
         if (pc.dir.x < 0)
         {
-            transform.localScale = new Vector3(-1, 1,1);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
-        else if(pc.dir.x > 0)
+        else if (pc.dir.x > 0)
         {
             transform.localScale = new Vector3(1, 1, 1);
         }
@@ -47,4 +88,6 @@ public class AnimationController : MonoBehaviour
         }
         anim.SetBool(temp, true);
     }
+
+
 }

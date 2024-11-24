@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1151544460257436977}
   - component: {fileID: 8299349378431221825}
   - component: {fileID: 7471474458419182725}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WindStorm
   m_TagString: Untagged
   m_Icon: {fileID: 0}

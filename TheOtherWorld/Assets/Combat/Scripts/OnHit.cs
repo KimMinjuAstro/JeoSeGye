@@ -17,8 +17,12 @@ public class OnHit : MonoBehaviour
         hp -= dmg;
 
         if (hp <= 0)
-        { 
-            Destroy(gameObject);
+        {
+            if (GetComponent<Monster>() != null)
+            { 
+                Destroy(gameObject);
+            }
+
         }
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8593483696559551849}
   - component: {fileID: 4742546670821171412}
   - component: {fileID: 8476113414529076848}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Torome
   m_TagString: Untagged
   m_Icon: {fileID: 0}

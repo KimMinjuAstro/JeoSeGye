@@ -1,3 +1,4 @@
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,10 @@ public class CheckButtonHandler : MonoBehaviour
    public class ButtonSelectedEvent : UnityEvent<int> { }
 
    public ButtonSelectedEvent onSelectedButtonInfo;
+   private GameObject giftPopUpUI;
+   public GameObject commonUI;
+
+   private Vector3 originalPosition;
 
    private void Awake()
    {
@@ -33,11 +38,13 @@ public class CheckButtonHandler : MonoBehaviour
             int buttonId = gB.gameObject.GetComponent<GiftBoxHandler>().ButtonId;
             if (buttonId != giftBox.ButtonId)
             {
-               Destroy(gB.gameObject);
+               gB.gameObject.SetActive(false);
             }
          }
+
+         originalPosition = giftBox.transform.position;
          giftBox.StopAnimation();
-         gameObject.SetActive(false);
+         gameObject.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
          
          Vector2 centerPosition = new Vector2(123f, -50f);
          RectTransform rectTransform = giftBox.GetComponent<RectTransform>();
@@ -48,7 +55,10 @@ public class CheckButtonHandler : MonoBehaviour
             .Join(rectTransform.DOScale(1.5f, 0.5f)) 
             .Append(rectTransform.DOScale(1.3f, 0.5f)) 
             .Join(rectTransform.DORotate(new Vector3(0, 0, 360), 0.5f, RotateMode.FastBeyond360)) // 회전 효과
-            .OnComplete(() => {
+            .OnComplete(() =>
+            {
+               giftPopUpUI = GameObject.Find("GiftPopUp");
+               StartCoroutine(SetActiveDelay(giftPopUpUI, 1.0f, false, giftBox.gameObject));
                
             });
       }
@@ -58,6 +68,14 @@ public class CheckButtonHandler : MonoBehaviour
       }
    }
 
+   IEnumerator SetActiveDelay(GameObject go ,float time, bool tf, GameObject gb)
+   {
+      yield return new WaitForSeconds(time);
+      gb.transform.position = originalPosition;
+      go.SetActive(tf);
+      commonUI.SetActive(true);
+   }
+   
    private void OnDestroy()
    {
       Button button = GetComponent<Button>();

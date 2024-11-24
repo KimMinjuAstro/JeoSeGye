@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -12,9 +13,16 @@ public class GiftPopUpHandler : MonoBehaviour
 
     private float targetScale = 4.182f;
     private float shrinkRate = 0.1f;
-    
-    
-    
+
+    private GameObject gift1;
+    private GameObject gift2;
+    private GameObject Gift3;
+
+    private void Start()
+    {
+        
+    }
+
     // Gift 팝업창 나타내기
     public void Show()
     {
@@ -23,6 +31,15 @@ public class GiftPopUpHandler : MonoBehaviour
         {
             gameObject.SetActive(true);
         }
+
+        foreach (Transform child in transform.GetChild(0))
+        {
+            child.gameObject.SetActive(true);
+            child.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+        
+        
+        transform.GetChild(1).localScale = new Vector3(1.0f, 1.0f, 1.0f);
         
         commonUI.SetActive(false);
         questPopUp.gameObject.SetActive(false);
@@ -38,4 +55,8 @@ public class GiftPopUpHandler : MonoBehaviour
 
         seq.Play();
     }
+    
+    
+    
+    
 }

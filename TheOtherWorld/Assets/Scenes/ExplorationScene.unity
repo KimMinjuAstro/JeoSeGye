@@ -29187,6 +29187,7 @@ MonoBehaviour:
   commonUI: {fileID: 1915086581}
   totalLevel: 0
   currentLevel: 1
+  currentTier: 0
 --- !u!1 &1513187984
 GameObject:
   m_ObjectHideFlags: 0
@@ -34014,7 +34015,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1833857792
 RectTransform:
   m_ObjectHideFlags: 0

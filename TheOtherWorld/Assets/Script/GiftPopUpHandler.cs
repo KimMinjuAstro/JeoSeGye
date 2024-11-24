@@ -20,6 +20,9 @@ public class GiftPopUpHandler : MonoBehaviour
     private GameObject gift2;
     private GameObject gift3;
     
+    // 비활성화된 선물 인덱스를 추적하기 위한 정적 HashSet
+    private static HashSet<int> disabledGiftIndices = new HashSet<int>();
+    
     private void Start()
     {
         gift1 = GameObject.Find("UI Canvas").transform.Find("GiftPopUp").transform.Find("GiftBox").GetChild(0).gameObject;
@@ -28,9 +31,34 @@ public class GiftPopUpHandler : MonoBehaviour
         Debug.Log(gift3);
     }
     
+    public static void DisableGift(int index)
+    {
+        disabledGiftIndices.Add(index);
+    }
+    
+    private Vector3[] GetPositionsForGifts(int count)
+    {
+        switch (count)
+        {
+            case 1:
+                return new Vector3[] { new Vector3(122f, -50f, 0) };
+            case 2:
+                return new Vector3[] { 
+                    new Vector3(81.5f, -50f, 0),
+                    new Vector3(163.5f, -50f, 0)
+                };
+            case 3:
+                return new Vector3[] {
+                    new Vector3(40f, -50f, 0),
+                    new Vector3(123f, -50f, 0),
+                    new Vector3(206f, -50f, 0)
+                };
+            default:
+                return new Vector3[0];
+        }
+    }
+    
 
-
-    // Gift 팝업창 나타내기
     public void Show()
     {
         // 활성화 여부 확인 및 초기화
@@ -39,29 +67,60 @@ public class GiftPopUpHandler : MonoBehaviour
             gameObject.SetActive(true);
         }
 
+        // 활성화된 선물 개수 계산
+        int activeGiftCount = 6 - disabledGiftIndices.Count;
+        if (activeGiftCount <= 0)
+        {
+            Debug.LogWarning("No active gifts to display!");
+            return;
+        }
+        
+        // 비활성화된 선물을 제외한 인덱스 목록 생성
+        List<int> availableIndices = new List<int>();
+        for (int i = 0; i < 6; i++)
+        {
+            if (!disabledGiftIndices.Contains(i))
+            {
+                availableIndices.Add(i);
+            }
+        }
+        
+        // 표시할 선물 개수 결정 (최대 3개, 최소 1개)
+        int displayCount = Mathf.Min(3, activeGiftCount);
+        int[] ranNums = Utils.RandomNumbers(availableIndices.Count, displayCount);
+        
+        // 모든 선물 비활성화
         foreach (Transform child in transform.GetChild(0))
         {
-            child.gameObject.SetActive(true);
-            child.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            child.gameObject.SetActive(false);
         }
+        
+        // 선택된 위치 배열 가져오기
+        Vector3[] positions = GetPositionsForGifts(displayCount);
 
-        int[] ranNums = Utils.RandomNumbers(6, 3);
-        // Debug.Log(ranNums[0]);
-        // Debug.Log(ranNums[1]);
-        // Debug.Log(ranNums[2]);
-
-        // 고정된 위치를 반복적으로 자식에 할당
-        for (int i = 0; i < ranNums.Length; i++)
+        // 선택된 선물만 활성화 및 위치 설정
+        for (int i = 0; i < displayCount; i++)
         {
-            RectTransform selectedGift = transform.GetChild(0).transform.GetChild(ranNums[i]).GetComponent<RectTransform>();
-            selectedGift.anchoredPosition = new Vector3(40f + (83f * i), -50f, 0); // 각 자식 위치를 83f씩 옆으로 이동
+            int selectedIndex = availableIndices[ranNums[i]];
+            Transform selectedGift = transform.GetChild(0).GetChild(selectedIndex);
+            selectedGift.gameObject.SetActive(true);
+            selectedGift.localScale = Vector3.one;
+            
+            RectTransform selectedGiftRect = selectedGift.GetComponent<RectTransform>();
+            selectedGiftRect.anchoredPosition = positions[i];
         }
-
-             // selectedGift = transform.GetChild(0).transform.GetChild(ranNums[1]).GetComponent<RectTransform>();
-             // selectedGift.anchoredPosition  = new Vector3(123f, -50f, 0);
-             // selectedGift = transform.GetChild(0).transform.GetChild(ranNums[2]).GetComponent<RectTransform>();
-             // selectedGift.anchoredPosition  = new Vector3(205f, -50f, 0);
-             
+        
+        // // 선택된 선물만 활성화 및 위치 설정
+        // for (int i = 0; i < ranNums.Length; i++)
+        // {
+        //     int selectedIndex = availableIndices[ranNums[i]];
+        //     Transform selectedGift = transform.GetChild(0).GetChild(selectedIndex);
+        //     selectedGift.gameObject.SetActive(true);
+        //     selectedGift.localScale = Vector3.one;
+        //     
+        //     RectTransform selectedGiftRect = selectedGift.GetComponent<RectTransform>();
+        //     selectedGiftRect.anchoredPosition = new Vector3(40f + (83f * i), -50f, 0);
+        // }
         
         
         transform.GetChild(1).localScale = new Vector3(1.0f, 1.0f, 1.0f);
@@ -71,17 +130,11 @@ public class GiftPopUpHandler : MonoBehaviour
         
         transform.localScale = Vector3.one * 0.1f; // 초기 크기 설정
 
-        // DOTween 함수를 차례대로 수행하게 해줍니다.
         var seq = DOTween.Sequence();
         
-        // DOScale 의 첫 번째 파라미터는 목표 Scale 값, 두 번째는 시간입니다.
         seq.Append(transform.DOScale(targetScale + targetScale * shrinkRate, 0.3f));
         seq.Append(transform.DOScale(targetScale, 0.1f));
 
         seq.Play();
     }
-    
-    
-    
-    
 }

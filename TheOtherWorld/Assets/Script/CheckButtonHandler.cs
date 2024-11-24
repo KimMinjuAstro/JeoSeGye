@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
@@ -29,6 +30,7 @@ public class CheckButtonHandler : MonoBehaviour
 
    public int totalLevel = 1;
    public int currentLevel = 1;
+   public int currentTier = 0;
    private string[] tierList = new string[] { "NORMAL", "RARE", "EPIC", "LEGEND" };
    private int tierIDX = 0;
 
@@ -87,41 +89,54 @@ public class CheckButtonHandler : MonoBehaviour
       }
    }
 
+   private Dictionary<int, int> levelInts = new Dictionary<int, int> { { 0, 1 }, { 1, 1 }, { 2, 1 }, { 3, 1 }, { 4, 1 }, { 5, 1 } };
+   private Dictionary<int, int> tierInts = new Dictionary<int, int> { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 }, { 4, 0 }, { 5, 0 } };
+   
    private void GiftUpdate(int buttonID)
    {
-      totalLevel++;
-      if (currentLevel < 5)
+      currentLevel = levelInts[buttonID];
+      currentTier = tierInts[buttonID];
+        
+      if (currentLevel < 10)
       {
-         currentLevel++;
+         levelInts[buttonID]++;
       }
       else
       {
-         tierIDX++;
-         currentLevel = 1;
-         selectedGiftBox.transform.Find("GiftTier").GetComponent<TextMeshProUGUI>().text = $"{tierList[tierIDX]}";
-    
-         switch (tierIDX)
+         if(currentTier < 4)
          {
-            case 1:
-               ColorUtility.TryParseHtmlString("#47ECFFFF", out tierColor);
-               break;
-            case 2:
-               ColorUtility.TryParseHtmlString("#C7AAFFFF", out tierColor);
-               break;
-            case 3:
-               ColorUtility.TryParseHtmlString("#FFF075FF", out tierColor);
-               break;
+            tierInts[buttonID]++;
+            levelInts[buttonID] = 1;
+            if (tierInts[buttonID] < 4)
+            {
+               selectedGiftBox.transform.Find("GiftTier").GetComponent<TextMeshProUGUI>().text = $"{tierList[tierInts[buttonID]]}";
+            
+               switch (tierInts[buttonID])
+               {
+                  case 1:
+                     ColorUtility.TryParseHtmlString("#47ECFFFF", out tierColor);
+                     break;
+                  case 2:
+                     ColorUtility.TryParseHtmlString("#C7AAFFFF", out tierColor);
+                     break;
+                  case 3:
+                     ColorUtility.TryParseHtmlString("#FFF075FF", out tierColor);
+                     break;
+               }
+               selectedGiftBox.transform.Find("GiftTier").GetComponent<TextMeshProUGUI>().color = tierColor;
+               selectedGiftBox.transform.Find("GiftLevel").GetComponent<TextMeshProUGUI>().color = tierColor;
+            }
+            else
+            {
+               Debug.Log($"{buttonID}번째 스킬은 최대 등급과 레벨에 도달했습니다.");
+               // 최대 등급 도달 시 선물 비활성화 및 인덱스 추가
+               selectedGiftBox.gameObject.SetActive(false);
+               GiftPopUpHandler.DisableGift(buttonID);
+            }
          }
-    
-         selectedGiftBox.transform.Find("GiftTier").GetComponent<TextMeshProUGUI>().color = tierColor;
-         selectedGiftBox.transform.Find("GiftLevel").GetComponent<TextMeshProUGUI>().color = tierColor;
       }
 
-      // selectedGiftBox.level = currentLevel;
-      selectedGiftBox.transform.Find("GiftLevel").GetComponent<TextMeshProUGUI>().text = $"Lv. {currentLevel}";
-      
-      
-
+      selectedGiftBox.transform.Find("GiftLevel").GetComponent<TextMeshProUGUI>().text = $"Lv. {levelInts[buttonID]}";
    }
 
    IEnumerator SetActiveDelay(GameObject go ,float time, bool tf, GameObject gb)

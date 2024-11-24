@@ -7,6 +7,11 @@ public class MeleeDamage : Weapon
     public float dmg = 0f;
     private Collider2D cd;
 
+    public void Init(float dmg)
+    {
+        this.dmg = dmg;
+    }
+
     private void Awake()
     {
         cd = GetComponent<Collider2D>();

@@ -51,10 +51,10 @@ public class CharacterLevelSystem : MonoBehaviour
         
         LoadCharacterData();
     }
-    
-    
-    private List<CharacterData> characterDataList;
-    private CharacterData currentCharacter;
+
+
+    public List<CharacterData> characterDataList;
+    public CharacterData currentCharacter;
     private int currentExp = 0;
 
     private void LoadCharacterData()
@@ -64,9 +64,10 @@ public class CharacterLevelSystem : MonoBehaviour
         if (jsonFile != null)
         {
             string jsonString = jsonFile.text;
-            characterDataList = JsonUtility.FromJson<List<CharacterData>>(
+
+            characterDataList = JsonUtility.FromJson<Wrapper<CharacterData>>(
                 "{\"Items\":" + jsonString + "}"
-            ).ToList();
+            ).Items.ToList();
         }
         else
         {
@@ -110,7 +111,8 @@ public class CharacterLevelSystem : MonoBehaviour
                 int remainingExp = currentExp - currentCharacter.CharacterMaxExp;
                 currentCharacter = nextLevelData;
                 currentExp = remainingExp;
-                
+
+                DataManager.instance.LevelUp();
                 OnLevelUp();
                 
                 // 남은 경험치로 추가 레벨업 가능한지 확인
@@ -123,7 +125,7 @@ public class CharacterLevelSystem : MonoBehaviour
     }
 
     // 레벨업 시 필요한 추가 처리 구현
-    private void OnLevelUp()
+    public void OnLevelUp()
     {
         Debug.Log($"레벨 업! 현재 레벨: {currentCharacter.CharacterLevel}");
         Debug.Log($"현재 HP : {currentCharacter.CharacterHp}");

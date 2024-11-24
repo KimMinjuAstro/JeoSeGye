@@ -28,6 +28,13 @@ public class SkillData
     public int SkillTime;
 }
 
+[Serializable]
+public class SkillDataWrapper
+{
+    public SkillData[] skills;
+}
+
+
 public class SkillSystem : MonoBehaviour
 {
     private static SkillSystem instance;
@@ -48,7 +55,7 @@ public class SkillSystem : MonoBehaviour
         }
     }
 
-    private List<SkillData> skillDataList;
+    public List<SkillData> skillDataList;
     private Dictionary<int, List<SkillData>> skillsByIndex;
     private Dictionary<string, List<SkillData>> skillsByName;
     private Dictionary<int, List<SkillData>> skillsByGrade;
@@ -71,7 +78,7 @@ public class SkillSystem : MonoBehaviour
 
     private void LoadSkillData()
     {
-        TextAsset skillDataFile = Resources.Load<TextAsset>("CharacterSkillDataTableJSON");
+        TextAsset skillDataFile = Resources.Load<TextAsset>("CharacterSkillDataTableFinalJSON");
         if (skillDataFile == null)
         {
             Debug.LogError("스킬 데이터 파일을 찾을 수 없습니다!");
@@ -79,8 +86,10 @@ public class SkillSystem : MonoBehaviour
         }
 
         string jsonData = skillDataFile.text;
+
         Debug.Log("JSON 파일 로드 시도: 성공");
         Debug.Log("JSON 문자열 길이: " + jsonData.Length);
+        Debug.Log("JSON 문자열 길이: " + jsonData);
 
         if (string.IsNullOrEmpty(jsonData))
         {
@@ -88,15 +97,18 @@ public class SkillSystem : MonoBehaviour
             return;
         }
 
+
         try
         {
-            skillDataList = new List<SkillData>(JsonUtility.FromJson<SkillData[]>(jsonData));
+            skillDataList = JsonUtility.FromJson<Wrapper<SkillData>>(
+                "{\"Items\":" + jsonData + "}"
+            ).Items.ToList();
 
             Debug.Log("JSON 파싱 결과: 성공");
         }
         catch (System.Exception e)
         {
-            // Debug.LogError("JSON 파싱 실패: " + e.Message);
+            Debug.LogError("JSON 파싱 실패: " + e.Message);
             return;
         }
 

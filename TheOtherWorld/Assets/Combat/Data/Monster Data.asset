@@ -13,14 +13,463 @@ MonoBehaviour:
   m_Name: Monster Data
   m_EditorClassIdentifier: 
   monsterInfos:
-  - MonsterId: 0
+  - MonsterId: M0001
     MonsterKind: 0
     MonsterTier: 0
     MonsterIndex: 0
-    MonsterLevel: 0
-    MonsterPower: 0
-    MonsterHp: 0
+    MonsterLevel: 1
+    MonsterPower: 10
+    MonsterHp: 30
     MonsterRegen: 0
     MonsterRegenTime: 0
-    MonsterExp: 0
-    MonsterMap: 0
+    MonsterExp: 30
+  - MonsterId: M0005
+    MonsterKind: 0
+    MonsterTier: 0
+    MonsterIndex: 0
+    MonsterLevel: 5
+    MonsterPower: 15
+    MonsterHp: 50
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 50
+  - MonsterId: M0010
+    MonsterKind: 0
+    MonsterTier: 0
+    MonsterIndex: 0
+    MonsterLevel: 10
+    MonsterPower: 25
+    MonsterHp: 100
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 80
+  - MonsterId: M0015
+    MonsterKind: 0
+    MonsterTier: 0
+    MonsterIndex: 1
+    MonsterLevel: 15
+    MonsterPower: 30
+    MonsterHp: 120
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 90
+  - MonsterId: M0020
+    MonsterKind: 0
+    MonsterTier: 0
+    MonsterIndex: 1
+    MonsterLevel: 20
+    MonsterPower: 35
+    MonsterHp: 200
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 120
+  - MonsterId: M0025
+    MonsterKind: 0
+    MonsterTier: 0
+    MonsterIndex: 2
+    MonsterLevel: 25
+    MonsterPower: 40
+    MonsterHp: 240
+    MonsterRegen: 0
+    MonsterRegenTime: 1
+    MonsterExp: 140
+  - MonsterId: M0030
+    MonsterKind: 0
+    MonsterTier: 0
+    MonsterIndex: 2
+    MonsterLevel: 30
+    MonsterPower: 50
+    MonsterHp: 300
+    MonsterRegen: 0
+    MonsterRegenTime: 1
+    MonsterExp: 170
+  - MonsterId: M1001
+    MonsterKind: 1
+    MonsterTier: 0
+    MonsterIndex: 0
+    MonsterLevel: 1
+    MonsterPower: 10
+    MonsterHp: 30
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 30
+  - MonsterId: M1005
+    MonsterKind: 1
+    MonsterTier: 0
+    MonsterIndex: 0
+    MonsterLevel: 5
+    MonsterPower: 15
+    MonsterHp: 50
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 50
+  - MonsterId: M1010
+    MonsterKind: 1
+    MonsterTier: 0
+    MonsterIndex: 0
+    MonsterLevel: 10
+    MonsterPower: 25
+    MonsterHp: 100
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 80
+  - MonsterId: M1015
+    MonsterKind: 1
+    MonsterTier: 0
+    MonsterIndex: 1
+    MonsterLevel: 15
+    MonsterPower: 30
+    MonsterHp: 120
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 90
+  - MonsterId: M1020
+    MonsterKind: 1
+    MonsterTier: 0
+    MonsterIndex: 1
+    MonsterLevel: 20
+    MonsterPower: 35
+    MonsterHp: 200
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 120
+  - MonsterId: M1025
+    MonsterKind: 1
+    MonsterTier: 0
+    MonsterIndex: 2
+    MonsterLevel: 25
+    MonsterPower: 40
+    MonsterHp: 240
+    MonsterRegen: 0
+    MonsterRegenTime: 1
+    MonsterExp: 140
+  - MonsterId: M1030
+    MonsterKind: 1
+    MonsterTier: 0
+    MonsterIndex: 2
+    MonsterLevel: 30
+    MonsterPower: 50
+    MonsterHp: 300
+    MonsterRegen: 0
+    MonsterRegenTime: 1
+    MonsterExp: 170
+  - MonsterId: M2001
+    MonsterKind: 2
+    MonsterTier: 0
+    MonsterIndex: 0
+    MonsterLevel: 1
+    MonsterPower: 10
+    MonsterHp: 30
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 30
+  - MonsterId: M2005
+    MonsterKind: 2
+    MonsterTier: 0
+    MonsterIndex: 0
+    MonsterLevel: 5
+    MonsterPower: 15
+    MonsterHp: 50
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 50
+  - MonsterId: M2010
+    MonsterKind: 2
+    MonsterTier: 0
+    MonsterIndex: 0
+    MonsterLevel: 10
+    MonsterPower: 25
+    MonsterHp: 100
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 80
+  - MonsterId: M2015
+    MonsterKind: 2
+    MonsterTier: 0
+    MonsterIndex: 1
+    MonsterLevel: 15
+    MonsterPower: 30
+    MonsterHp: 120
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 90
+  - MonsterId: M2020
+    MonsterKind: 2
+    MonsterTier: 0
+    MonsterIndex: 1
+    MonsterLevel: 20
+    MonsterPower: 35
+    MonsterHp: 200
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 120
+  - MonsterId: M2025
+    MonsterKind: 2
+    MonsterTier: 0
+    MonsterIndex: 2
+    MonsterLevel: 25
+    MonsterPower: 40
+    MonsterHp: 240
+    MonsterRegen: 0
+    MonsterRegenTime: 1
+    MonsterExp: 140
+  - MonsterId: M2030
+    MonsterKind: 2
+    MonsterTier: 0
+    MonsterIndex: 2
+    MonsterLevel: 30
+    MonsterPower: 50
+    MonsterHp: 300
+    MonsterRegen: 0
+    MonsterRegenTime: 1
+    MonsterExp: 170
+  - MonsterId: M3001
+    MonsterKind: 3
+    MonsterTier: 0
+    MonsterIndex: 0
+    MonsterLevel: 1
+    MonsterPower: 10
+    MonsterHp: 30
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 30
+  - MonsterId: M3005
+    MonsterKind: 3
+    MonsterTier: 0
+    MonsterIndex: 0
+    MonsterLevel: 5
+    MonsterPower: 15
+    MonsterHp: 50
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 50
+  - MonsterId: M3010
+    MonsterKind: 3
+    MonsterTier: 0
+    MonsterIndex: 0
+    MonsterLevel: 10
+    MonsterPower: 25
+    MonsterHp: 100
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 80
+  - MonsterId: M3015
+    MonsterKind: 3
+    MonsterTier: 0
+    MonsterIndex: 1
+    MonsterLevel: 15
+    MonsterPower: 30
+    MonsterHp: 120
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 90
+  - MonsterId: M3020
+    MonsterKind: 3
+    MonsterTier: 0
+    MonsterIndex: 1
+    MonsterLevel: 20
+    MonsterPower: 35
+    MonsterHp: 200
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 120
+  - MonsterId: M3025
+    MonsterKind: 3
+    MonsterTier: 0
+    MonsterIndex: 2
+    MonsterLevel: 25
+    MonsterPower: 40
+    MonsterHp: 240
+    MonsterRegen: 0
+    MonsterRegenTime: 1
+    MonsterExp: 140
+  - MonsterId: M3030
+    MonsterKind: 3
+    MonsterTier: 0
+    MonsterIndex: 2
+    MonsterLevel: 30
+    MonsterPower: 50
+    MonsterHp: 300
+    MonsterRegen: 0
+    MonsterRegenTime: 1
+    MonsterExp: 170
+  - MonsterId: M4001
+    MonsterKind: 4
+    MonsterTier: 0
+    MonsterIndex: 0
+    MonsterLevel: 1
+    MonsterPower: 10
+    MonsterHp: 30
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 30
+  - MonsterId: M4005
+    MonsterKind: 4
+    MonsterTier: 0
+    MonsterIndex: 0
+    MonsterLevel: 5
+    MonsterPower: 15
+    MonsterHp: 50
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 50
+  - MonsterId: M4010
+    MonsterKind: 4
+    MonsterTier: 0
+    MonsterIndex: 0
+    MonsterLevel: 10
+    MonsterPower: 25
+    MonsterHp: 100
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 80
+  - MonsterId: M4015
+    MonsterKind: 4
+    MonsterTier: 0
+    MonsterIndex: 1
+    MonsterLevel: 15
+    MonsterPower: 30
+    MonsterHp: 120
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 90
+  - MonsterId: M4020
+    MonsterKind: 4
+    MonsterTier: 0
+    MonsterIndex: 1
+    MonsterLevel: 20
+    MonsterPower: 35
+    MonsterHp: 200
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 120
+  - MonsterId: M4025
+    MonsterKind: 4
+    MonsterTier: 0
+    MonsterIndex: 2
+    MonsterLevel: 25
+    MonsterPower: 40
+    MonsterHp: 240
+    MonsterRegen: 0
+    MonsterRegenTime: 1
+    MonsterExp: 140
+  - MonsterId: M4030
+    MonsterKind: 4
+    MonsterTier: 0
+    MonsterIndex: 2
+    MonsterLevel: 30
+    MonsterPower: 50
+    MonsterHp: 300
+    MonsterRegen: 0
+    MonsterRegenTime: 1
+    MonsterExp: 170
+  - MonsterId: M5001
+    MonsterKind: 5
+    MonsterTier: 0
+    MonsterIndex: 0
+    MonsterLevel: 1
+    MonsterPower: 10
+    MonsterHp: 30
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 30
+  - MonsterId: M5005
+    MonsterKind: 5
+    MonsterTier: 0
+    MonsterIndex: 0
+    MonsterLevel: 5
+    MonsterPower: 15
+    MonsterHp: 50
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 50
+  - MonsterId: M5010
+    MonsterKind: 5
+    MonsterTier: 0
+    MonsterIndex: 0
+    MonsterLevel: 10
+    MonsterPower: 25
+    MonsterHp: 100
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 80
+  - MonsterId: M5015
+    MonsterKind: 5
+    MonsterTier: 0
+    MonsterIndex: 1
+    MonsterLevel: 15
+    MonsterPower: 30
+    MonsterHp: 120
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 90
+  - MonsterId: M5020
+    MonsterKind: 5
+    MonsterTier: 0
+    MonsterIndex: 1
+    MonsterLevel: 20
+    MonsterPower: 35
+    MonsterHp: 200
+    MonsterRegen: 0
+    MonsterRegenTime: 0
+    MonsterExp: 120
+  - MonsterId: M5025
+    MonsterKind: 5
+    MonsterTier: 0
+    MonsterIndex: 2
+    MonsterLevel: 25
+    MonsterPower: 40
+    MonsterHp: 240
+    MonsterRegen: 0
+    MonsterRegenTime: 1
+    MonsterExp: 140
+  - MonsterId: M5030
+    MonsterKind: 5
+    MonsterTier: 0
+    MonsterIndex: 2
+    MonsterLevel: 30
+    MonsterPower: 50
+    MonsterHp: 300
+    MonsterRegen: 0
+    MonsterRegenTime: 1
+    MonsterExp: 170
+  - MonsterId: M1040
+    MonsterKind: 0
+    MonsterTier: 1
+    MonsterIndex: 0
+    MonsterLevel: 40
+    MonsterPower: 100
+    MonsterHp: 500
+    MonsterRegen: 1
+    MonsterRegenTime: 2
+    MonsterExp: 200
+  - MonsterId: M3145
+    MonsterKind: 3
+    MonsterTier: 1
+    MonsterIndex: 1
+    MonsterLevel: 45
+    MonsterPower: 120
+    MonsterHp: 600
+    MonsterRegen: 1
+    MonsterRegenTime: 2
+    MonsterExp: 250
+  - MonsterId: M6150
+    MonsterKind: 6
+    MonsterTier: 1
+    MonsterIndex: 2
+    MonsterLevel: 50
+    MonsterPower: 140
+    MonsterHp: 700
+    MonsterRegen: 1
+    MonsterRegenTime: 2
+    MonsterExp: 300
+  - MonsterId: M7260
+    MonsterKind: 7
+    MonsterTier: 2
+    MonsterIndex: 0
+    MonsterLevel: 60
+    MonsterPower: 200
+    MonsterHp: 1000
+    MonsterRegen: 1
+    MonsterRegenTime: 2
+    MonsterExp: 500

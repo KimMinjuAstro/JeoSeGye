@@ -241,6 +241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb1293202c95274b8102c26394de468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: M5015
+  Level: 0
   moveSpeed: 0.5
   attackSpeed: 1
   targetRange: 1
@@ -304,6 +306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   maxHp: 0
+  exp: 0
 --- !u!50 &3146671776955757367
 Rigidbody2D:
   serializedVersion: 4

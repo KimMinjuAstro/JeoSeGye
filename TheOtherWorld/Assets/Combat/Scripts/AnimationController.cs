@@ -8,6 +8,7 @@ public class AnimationController : MonoBehaviour
     Animator anim;
     PlayerController pc;
     public GameObject baseAttack;
+    //public 
     
     public float baseAttackSpeed = 1f;
     private float baseAttackTimer = 0f;

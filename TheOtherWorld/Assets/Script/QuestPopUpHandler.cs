@@ -18,6 +18,8 @@ public class QuestPopUpHandler : MonoBehaviour
     [FormerlySerializedAs("questPopUp")] 
     public QuestPopUpHandler questWindow;
     public TextMeshProUGUI questTitle;
+    public TextMeshProUGUI questTitle2;
+    
     public TextMeshProUGUI questDetail;
     public TextMeshProUGUI giftNum;
     public Button clearButton;
@@ -101,6 +103,7 @@ public class QuestPopUpHandler : MonoBehaviour
             // UI 업데이트
             if (selectedQuest != null)
             {
+                questTitle2.text = $"{selectedQuest.QuestDetail}";
                 questTitle.text = $"{selectedQuest.QuestDetail}";
                 questDetail.text = $"성공 경험치 : {selectedQuest.QuestExp}";
                 giftNum.text = $"x {selectedQuest.QuestGiftNumber}";

@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
+
 
 public class GiftPopUpHandler : MonoBehaviour
 {
@@ -16,12 +18,17 @@ public class GiftPopUpHandler : MonoBehaviour
 
     private GameObject gift1;
     private GameObject gift2;
-    private GameObject Gift3;
-
+    private GameObject gift3;
+    
     private void Start()
     {
-        
+        gift1 = GameObject.Find("UI Canvas").transform.Find("GiftPopUp").transform.Find("GiftBox").GetChild(0).gameObject;
+        gift2 = GameObject.Find("UI Canvas").transform.Find("GiftPopUp").transform.Find("GiftBox").GetChild(1).gameObject;
+        gift3= GameObject.Find("UI Canvas").transform.Find("GiftPopUp").transform.Find("GiftBox").GetChild(2).gameObject;
+        Debug.Log(gift3);
     }
+    
+
 
     // Gift 팝업창 나타내기
     public void Show()
@@ -37,6 +44,24 @@ public class GiftPopUpHandler : MonoBehaviour
             child.gameObject.SetActive(true);
             child.gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
+
+        int[] ranNums = Utils.RandomNumbers(6, 3);
+        // Debug.Log(ranNums[0]);
+        // Debug.Log(ranNums[1]);
+        // Debug.Log(ranNums[2]);
+
+        // 고정된 위치를 반복적으로 자식에 할당
+        for (int i = 0; i < ranNums.Length; i++)
+        {
+            RectTransform selectedGift = transform.GetChild(0).transform.GetChild(ranNums[i]).GetComponent<RectTransform>();
+            selectedGift.anchoredPosition = new Vector3(40f + (83f * i), -50f, 0); // 각 자식 위치를 83f씩 옆으로 이동
+        }
+
+             // selectedGift = transform.GetChild(0).transform.GetChild(ranNums[1]).GetComponent<RectTransform>();
+             // selectedGift.anchoredPosition  = new Vector3(123f, -50f, 0);
+             // selectedGift = transform.GetChild(0).transform.GetChild(ranNums[2]).GetComponent<RectTransform>();
+             // selectedGift.anchoredPosition  = new Vector3(205f, -50f, 0);
+             
         
         
         transform.GetChild(1).localScale = new Vector3(1.0f, 1.0f, 1.0f);

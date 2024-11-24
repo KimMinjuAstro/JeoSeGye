@@ -11,6 +11,7 @@ public class QuestData
     public int QuestType;   // 0: 일반몹, 1: 중간몹, 2:보스몹
     public int QuestExp;    // 퀘스트 성공 경험치
     public int QuestGiftNumber; // 퀘스트 성공시 Gife 선택 수
+    public string QuestDetail;
 }
 
 public class QuestSystem : MonoBehaviour
@@ -113,6 +114,14 @@ public class QuestSystem : MonoBehaviour
         }
         return null;
     }
+    
+    // 퀠스트 상세 설명 가져오기
+    public string GetQuestDetail(string questId)
+    {
+        QuestData quest = GetQuestById(questId);
+        return quest != null ? quest.QuestDetail : "퀠스트를 찾을 수 없습니다.";
+    }
+    
 
     // 퀘스트 완료 처리
     public void CompleteQuest(string questId)

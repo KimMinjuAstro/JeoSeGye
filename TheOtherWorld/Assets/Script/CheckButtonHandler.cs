@@ -1,8 +1,15 @@
+using System;
 using System.Collections;
 using DG.Tweening;
+using TMPro;
+using Unity.VisualScripting;
+using UnityEditor.PackageManager;
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using ColorUtility = UnityEngine.ColorUtility;
+using Sequence = DG.Tweening.Sequence;
 
 public class CheckButtonHandler : MonoBehaviour
 {
@@ -14,6 +21,17 @@ public class CheckButtonHandler : MonoBehaviour
    public GameObject commonUI;
 
    private Vector3 originalPosition;
+   private GiftBoxHandler selectedGiftBox;
+
+   private int buttonID;
+   private Color tierColor;
+
+
+   public int totalLevel = 1;
+   public int currentLevel = 1;
+   private string[] tierList = new string[] { "NORMAL", "RARE", "EPIC", "LEGEND" };
+   private int tierIDX = 0;
+
 
    private void Awake()
    {
@@ -29,9 +47,11 @@ public class CheckButtonHandler : MonoBehaviour
       {
          // 선택된 버튼의 ID 정보를 이벤트로 전달
          onSelectedButtonInfo?.Invoke(giftBox.ButtonId);
-         
+         buttonID = giftBox.ButtonId;
          Debug.Log($"Selected Button ID: {giftBox.ButtonId}");
-
+         selectedGiftBox = giftBox;
+         
+         
          Transform giftBoxes = GameObject.Find("GiftBox").transform;
          foreach (Transform gB in giftBoxes)
          {
@@ -59,7 +79,6 @@ public class CheckButtonHandler : MonoBehaviour
             {
                giftPopUpUI = GameObject.Find("GiftPopUp");
                StartCoroutine(SetActiveDelay(giftPopUpUI, 1.0f, false, giftBox.gameObject));
-               
             });
       }
       else
@@ -68,10 +87,48 @@ public class CheckButtonHandler : MonoBehaviour
       }
    }
 
+   private void GiftUpdate(int buttonID)
+   {
+      totalLevel++;
+      if (currentLevel < 5)
+      {
+         currentLevel++;
+      }
+      else
+      {
+         tierIDX++;
+         currentLevel = 1;
+         selectedGiftBox.transform.Find("GiftTier").GetComponent<TextMeshProUGUI>().text = $"{tierList[tierIDX]}";
+    
+         switch (tierIDX)
+         {
+            case 1:
+               ColorUtility.TryParseHtmlString("#47ECFFFF", out tierColor);
+               break;
+            case 2:
+               ColorUtility.TryParseHtmlString("#C7AAFFFF", out tierColor);
+               break;
+            case 3:
+               ColorUtility.TryParseHtmlString("#FFF075FF", out tierColor);
+               break;
+         }
+    
+         selectedGiftBox.transform.Find("GiftTier").GetComponent<TextMeshProUGUI>().color = tierColor;
+         selectedGiftBox.transform.Find("GiftLevel").GetComponent<TextMeshProUGUI>().color = tierColor;
+      }
+
+      // selectedGiftBox.level = currentLevel;
+      selectedGiftBox.transform.Find("GiftLevel").GetComponent<TextMeshProUGUI>().text = $"Lv. {currentLevel}";
+      
+      
+
+   }
+
    IEnumerator SetActiveDelay(GameObject go ,float time, bool tf, GameObject gb)
    {
       yield return new WaitForSeconds(time);
       gb.transform.position = originalPosition;
+      GiftUpdate(buttonID);
       go.SetActive(tf);
       commonUI.SetActive(true);
    }

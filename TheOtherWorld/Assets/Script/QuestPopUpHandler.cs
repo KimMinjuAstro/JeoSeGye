@@ -101,11 +101,11 @@ public class QuestPopUpHandler : MonoBehaviour
             // UI 업데이트
             if (selectedQuest != null)
             {
-                questTitle.text = $"{type} Map {selectedQuest.QuestIndex} Title";
-                questDetail.text = $"{type} Map {selectedQuest.QuestIndex} Detail" + "\n" + $"Reward : {selectedQuest.QuestExp}";
+                questTitle.text = $"{selectedQuest.QuestDetail}";
+                questDetail.text = $"성공 경험치 : {selectedQuest.QuestExp}";
                 giftNum.text = $"x {selectedQuest.QuestGiftNumber}";
                 
-                Debug.Log($"Type {type}에서 Quest Index {randomIndex} 선택됨. 남은 퀘스트 수: {typeQuestList.Count - usedQuestIndices[type].Count}");
+                // Debug.Log($"Type {type}에서 Quest Index {randomIndex} 선택됨. 남은 퀘스트 수: {typeQuestList.Count - usedQuestIndices[type].Count}");
             }
             else
             {
@@ -120,11 +120,16 @@ public class QuestPopUpHandler : MonoBehaviour
 
     public void OnClickClearButton()
     {
+        // 다음 퀘스트 미리 생성
         QuestApply(currentQuestType);
+        
         var seq = DOTween.Sequence();
         seq.Play().OnComplete(() => {
             giftPopUpWindow.Show();
         });
+        
+        // 새로운 랜덤 스킬 생성 및 UI에 표시
+        // GiftSkillSystem.Instance.GenerateRandomSkills();
     }
     
     public void Show()

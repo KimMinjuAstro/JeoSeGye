@@ -2,9 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
+public class GitfBox
+{
+    
+}
+
 
 public class GiftBoxHandler : MonoBehaviour
 {
@@ -14,12 +21,23 @@ public class GiftBoxHandler : MonoBehaviour
     private Sequence currentSequence;
     private static GiftBoxHandler giftBox;
     private Button button;
+
+    private TextMeshProUGUI giftTier;
+    private Image giftIcon;
+    private TextMeshProUGUI giftType;
+    private TextMeshProUGUI giftDetail;
+    private TextMeshProUGUI giftLevel;
+
+    public int level = 1;
     
     [SerializeField] private int buttonId;
     public int ButtonId => buttonId;
     public static GiftBoxHandler GiftBox => giftBox;
 
     private QuestData currentQuestData;
+
+    // private int activeCount = 0;
+    // private bool activeCompleted = false;
     
     private void Awake()
     {
@@ -28,6 +46,26 @@ public class GiftBoxHandler : MonoBehaviour
         button.onClick.AddListener(OnButtonClick);
     }
 
+    private void Start()
+    {
+        giftTier = transform.Find("GiftTier").GetComponent<TextMeshProUGUI>();
+        giftType = transform.Find("GiftType").GetComponent<TextMeshProUGUI>();
+        giftDetail = transform.Find("GiftDetail").GetComponent<TextMeshProUGUI>();
+        giftIcon = transform.Find("GiftIcon").GetComponent<Image>();
+        
+    }
+
+    public void GiftApply()
+    {
+        
+    }
+
+    public void PassiveSkill()
+    {
+        
+    }
+    
+    
     private void OnButtonClick()
     {
         // 현재 선택된 버튼이 있고, 그게 자신이 아니라면 애니메이션 정지

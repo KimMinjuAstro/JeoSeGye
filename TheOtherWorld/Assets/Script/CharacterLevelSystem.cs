@@ -111,7 +111,8 @@ public class CharacterLevelSystem : MonoBehaviour
                 int remainingExp = currentExp - currentCharacter.CharacterMaxExp;
                 currentCharacter = nextLevelData;
                 currentExp = remainingExp;
-                
+
+                DataManager.instance.LevelUp();
                 OnLevelUp();
                 
                 // 남은 경험치로 추가 레벨업 가능한지 확인
@@ -124,7 +125,7 @@ public class CharacterLevelSystem : MonoBehaviour
     }
 
     // 레벨업 시 필요한 추가 처리 구현
-    private void OnLevelUp()
+    public void OnLevelUp()
     {
         Debug.Log($"레벨 업! 현재 레벨: {currentCharacter.CharacterLevel}");
         Debug.Log($"현재 HP : {currentCharacter.CharacterHp}");

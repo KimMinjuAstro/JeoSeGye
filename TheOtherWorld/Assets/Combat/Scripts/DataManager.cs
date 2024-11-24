@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -56,5 +57,13 @@ public class DataManager : MonoBehaviour
         maxExp = stat.GetMaxExp();
         currentHp = stat.GetCurrentHp();
         expPercentage = stat.GetExpPercentage();
+    }
+
+
+    internal void LevelUp()
+    {
+        PlayerManager.instance.Player.GetComponent<OnHit>().hp = maxExp;
+        PlayerManager.instance.Player.GetComponent<OnHit>().maxHp = maxExp;
+        PlayerManager.instance.Player.GetComponentInChildren<HpBar>().HpBarDamage();
     }
 }

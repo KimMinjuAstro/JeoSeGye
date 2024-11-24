@@ -4,7 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class CloseButtonHandler : MonoBehaviour
+public class QuestCloseButtonHandler : MonoBehaviour
 {
     public QuestPopUpHandler questPopUp;
 

@@ -28,7 +28,7 @@ public class GiftPopUpHandler : MonoBehaviour
         gift1 = GameObject.Find("UI Canvas").transform.Find("GiftPopUp").transform.Find("GiftBox").GetChild(0).gameObject;
         gift2 = GameObject.Find("UI Canvas").transform.Find("GiftPopUp").transform.Find("GiftBox").GetChild(1).gameObject;
         gift3= GameObject.Find("UI Canvas").transform.Find("GiftPopUp").transform.Find("GiftBox").GetChild(2).gameObject;
-        Debug.Log(gift3);
+        // Debug.Log(gift3);
     }
     
     public static void DisableGift(int index)

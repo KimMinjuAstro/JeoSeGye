@@ -55,7 +55,7 @@ public class QuestPopUpHandler : MonoBehaviour
             // 리스트가 비어있거나 null인지 먼저 체크
             if (typeQuestList == null || typeQuestList.Count == 0)
             {
-                Debug.LogWarning($"Type {type}에 해당하는 퀘스트가 없습니다.");
+                // Debug.LogWarning($"Type {type}에 해당하는 퀘스트가 없습니다.");
                 return;
             }
             
@@ -63,14 +63,14 @@ public class QuestPopUpHandler : MonoBehaviour
             if (!usedQuestIndices.ContainsKey(type))
             {
                 usedQuestIndices.Add(type, new HashSet<int>());
-                Debug.Log($"Type {type}에 대한 새로운 HashSet을 생성했습니다.");
+                // Debug.Log($"Type {type}에 대한 새로운 HashSet을 생성했습니다.");
             }
             
             // 모든 퀘스트를 다 사용했다면 리셋
             if (usedQuestIndices[type].Count >= typeQuestList.Count)
             {
                 usedQuestIndices[type].Clear();
-                Debug.Log($"Type {type}의 모든 퀘스트를 사용했습니다. 리셋했습니다.");
+                // Debug.Log($"Type {type}의 모든 퀘스트를 사용했습니다. 리셋했습니다.");
             }
             
             // 사용하지 않은 인덱스들 중에서 랜덤으로 선택

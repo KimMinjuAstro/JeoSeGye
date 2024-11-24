@@ -13,8 +13,10 @@ public class EnemyIndicator : MonoBehaviour
     {
         if (enemy == null) // 적이 제거된 경우
         {
-            Destroy(indicator.gameObject); // 인디케이터 제거
-            Destroy(this); // 스크립트도 제거
+            //Destroy(indicator.gameObject); // 인디케이터 제거
+            //Destroy(this); // 스크립트도 제거
+
+            indicator.gameObject.SetActive(false);
             return;
         }
 

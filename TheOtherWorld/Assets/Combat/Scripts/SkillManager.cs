@@ -5,11 +5,17 @@ using System.Threading;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillManager : MonoBehaviour
 {
     protected Monster[] monsters { get { return TargetManager.instance.monsters.ToArray(); } }
     public PlayerController player;
+
+    public Image image1;
+    public Image image2;
+    public Image image3;
+    public Image image4;
 
     public bool windStorm;         // 윈드 스톰
     public bool moon;              // 위성
@@ -20,45 +26,81 @@ public class SkillManager : MonoBehaviour
 
     [Header("윈드")]
     public GameObject windStormPrefabs;
+    public Sprite windStormImage;
     public float windStormDuration = 1.0f;
     public float windStormTimer = 0.0f;
     public bool isWindStorm = false;
     public float windStormDmg = 10f;
+    public bool windStormImagebool = false;
 
     [Header("위성")]
     public GameObject moonPrefabs;
+    public Sprite moonImage;
     public float moonDuration = 1.0f;
     public float moonTimer = 0.0f;
     public bool isMoon = false;
     public float mooonDmg = 10f;
+    public bool moonImagebool = false;
 
     [Header("아이스")]
     public GameObject icePrefabs;
+    public Sprite iceImage;
     public float iceDuration = 1.0f;
     public float iceTimer = 0.0f;
     public bool isIce = false;
     public float iceDmg = 10f;
+    public bool iceImagebool = false;
 
     [Header("다크")]
     public GameObject toromePrefabs;
+    public Sprite toromeImage;
     public float toromeDuration = 1.0f;
     public float toromeTimer = 0.0f;
     public bool isTorome = false;
     public float toromeDmg = 10f;
+    public bool toromeImagebool = false;
 
     [Header("파이어")]
     public GameObject firePrefabs;
+    public Sprite fireImage;
     public float fireDuration = 1.0f;
     public float fireTimer = 0.0f;
     public bool isFire = false;
     public float fireDmg = 10f;
+    public bool fireImagebool = false;
 
     [Header("파이어2")]
     public GameObject fire2Prefabs;
+    public Sprite fire2Image;
     public float fire2Duration = 1.0f;
     public float fire2Timer = 0.0f;
     public bool isFire2 = false;
     public float fire2Dmg = 10f;
+    public bool fire2Imagebool = false;
+
+    public void SpriteIcon(Sprite sprite)
+    {
+        if (image1.enabled == false)
+        {
+            image1.sprite = sprite;
+            image1.enabled = true;
+        }
+        else if (!image2.enabled)
+        {
+            image2.sprite = sprite;
+            image2.enabled = true;
+        }
+        else if (!image3.enabled)
+        {
+            image3.sprite = sprite;
+            image3.enabled = true;
+        }
+        else if(!image4.enabled)
+        {
+            image4.sprite = sprite;
+            image4.enabled = true;
+        }
+    }
 
 
     private void Start()
@@ -99,6 +141,12 @@ public class SkillManager : MonoBehaviour
 
     private void Skill_DarknessExplosion()
     {
+        if (!toromeImagebool)
+        {
+            toromeImagebool = true;
+            SpriteIcon(toromeImage);
+        }
+
         toromeTimer += Time.deltaTime;
 
         if (toromeTimer >= toromeDuration)
@@ -128,9 +176,53 @@ public class SkillManager : MonoBehaviour
 
         }
     }
+    private void SkillMoon()
+    {
+        if (!moonImagebool)
+        {
+            moonImagebool = true;
+            SpriteIcon(moonImage);
+        }
+        moonTimer += Time.deltaTime;
+
+        if (moonTimer >= moonDuration)
+        {
+            if (isMoon) return;
+
+            isMoon = true;
+            StartCoroutine(MoonEnd());
+
+            if (monsters.Length <= 0)
+            {
+                //Debug.Log("근처에 적이 없음");
+                return;
+            }
+
+            Monster monster = FindClosestTarget();
+
+            Vector2 direction = (monster.transform.position - player.transform.position).normalized;
+            var go = Instantiate(moonPrefabs, player.transform.position, Quaternion.identity);
+
+            // 발사체 회전 설정 (적 방향으로)
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 각도 계산
+            go.transform.rotation = Quaternion.Euler(0, 0, angle);
+            go.GetComponent<BulletDamage>().Init(mooonDmg);
+
+            toromeTimer = 0;
+
+        }
+    }
 
     private void Skill_Fire()
     {
+        if (!fireImagebool)
+        { 
+            fireImagebool = true;
+            SpriteIcon(fireImage);
+            
+        }
+
+
         fireTimer += Time.deltaTime;
 
         if (fireTimer >= fireDuration)
@@ -164,6 +256,13 @@ public class SkillManager : MonoBehaviour
 
     private void Skill_Fire2()
     {
+        if (!fire2Imagebool)
+        {
+            fire2Imagebool = true;
+            SpriteIcon(fire2Image);
+
+        }
+
         fire2Timer += Time.deltaTime;
 
         if (fire2Timer >= fire2Duration)
@@ -179,7 +278,10 @@ public class SkillManager : MonoBehaviour
                 return;
             }
 
+            fire2Timer = 0;
             Monster monster = FindClosestTarget();
+
+            if (monster == null) return;
 
             Vector2 direction = (monster.transform.position - player.transform.position).normalized;
 
@@ -190,13 +292,13 @@ public class SkillManager : MonoBehaviour
             go.transform.rotation = Quaternion.Euler(0, 0, angle);
             go.GetComponent<BulletDamage>().Init(fire2Dmg);
 
-            fire2Timer = 0;
 
         }
     }
 
     private IEnumerator ToromeEnd()
     {
+        SpriteIcon(toromeImage);
         yield return new WaitForSeconds(.3f);
         isTorome = false;
     }
@@ -204,12 +306,19 @@ public class SkillManager : MonoBehaviour
 
     private IEnumerator FireEnd()
     {
+       
         yield return new WaitForSeconds(.3f);
         isFire = false;
     }
 
     private void Skill_IceArrow()
     {
+        if (!iceImagebool)
+        { 
+            iceImagebool = true;
+            SpriteIcon(iceImage);
+        
+        }
         iceTimer += Time.deltaTime;
 
         if (iceTimer >= iceDuration)
@@ -241,35 +350,6 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    private void SkillMoon()
-    {
-        moonTimer += Time.deltaTime;
-
-        if (moonTimer >= moonDuration)
-        {
-            if (isMoon) return;
-
-            isMoon = true;
-
-            if (monsters.Length <= 0)
-            {
-                //Debug.Log("근처에 적이 없음");
-                return;
-            }
-
-            for (int i = 0; i < monsters.Length; i++)
-            {
-                var go = Instantiate(windStormPrefabs, monsters[i].transform.position, Quaternion.identity);
-                Destroy(go, 1f);
-                monsters[i].GetComponent<OnHit>().TakeDamage(mooonDmg);
-                monsters[i].GetComponentInChildren<HpBar>().HpBarDamage();
-            }
-
-            windStormTimer = 0;
-
-            StartCoroutine(MoonEnd());
-        }
-    }
 
     private Monster FindClosestTarget()
     {
@@ -294,6 +374,11 @@ public class SkillManager : MonoBehaviour
 
     private void SkillWinStorm()
     {
+        if (!windStormImagebool)
+        {
+            windStormImagebool = true;
+            SpriteIcon(windStormImage);
+        }
         windStormTimer += Time.deltaTime;
 
         if (windStormTimer >= windStormDuration)

@@ -6,19 +6,22 @@ using UnityEngine.UI;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    public static MonsterSpawner Instance;
+    public static MonsterSpawner instance;
 
     private void Awake()
     {
-        if (Instance == null) 
+        if (instance == null) 
         {
-            Instance = this;
+            instance = this;
         }
     }
 
-    public List<Monster> monsters = new List<Monster>();
-    public List<Image> images = new List<Image>();
 
+    public MonstersData monsterInfo;
+    public List<Monster> monsters = new List<Monster>();
+    public List<RectTransform> indicator = new List<RectTransform>();
+
+    private GameObject indicators;
     private PlayerController Player;
 
     public GameObject[] enemyPrefab; // 생성할 적 프리팹
@@ -55,13 +58,24 @@ public class MonsterSpawner : MonoBehaviour
 
     void SpawnEnemies(int spawnIndex)
     {
+        MonsterData monsterData = null;
+
+        for (int i = 0; i < monsterInfo.monsterInfos.Count; i++)
+        {
+            if (monsterInfo.monsterInfos[i].MonsterId == enemyPrefab[spawnIndex].GetComponent<Monster>().name)
+            {
+                monsterData = monsterInfo.monsterInfos[i];
+            }            
+        }
+
         for (int i = 0; i < spawnerPosition.Length; i++)
         {
+            
             Monster instance = Instantiate(enemyPrefab[spawnIndex], spawnerPosition[i].transform.position, Quaternion.identity).GetComponent<Monster>();
+
+            instance.Init(monsterData.MonsterHp, monsterData.MonsterLevel, monsterData.MonsterPower, monsterData.MonsterExp);
             monsters.Add(instance);
 
-            // 인디게이터 생성
-            //images 
         }
 
         end = false;

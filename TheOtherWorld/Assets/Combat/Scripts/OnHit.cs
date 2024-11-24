@@ -6,6 +6,7 @@ public class OnHit : MonoBehaviour
 {
     public float hp;
     public float maxHp;
+    public int exp;
 
     private void Start()
     {
@@ -20,10 +21,15 @@ public class OnHit : MonoBehaviour
         {
             if (GetComponent<Monster>() != null)
             {
-                MonsterSpawner.Instance.SpawnerEenemy(this.gameObject.GetComponent<Monster>());
+                MonsterSpawner.instance.SpawnerEenemy(this.gameObject.GetComponent<Monster>());
+                DataManager.instance.AddExperience(exp);
                 Destroy(gameObject);
             }
 
+            if (GetComponent<PlayerController>() != null)
+            { 
+                // Á×À½
+            }
         }
     }
 }

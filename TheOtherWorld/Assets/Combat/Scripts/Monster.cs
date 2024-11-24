@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
+    public string name;  
+
+    private OnHit hit;
+    private MeleeDamage melee;
+    public float Level = 0;
     private PlayerController Player;
     public float moveSpeed = 1.5f;
     public float attackSpeed = 1.0f;
@@ -14,9 +19,19 @@ public class Monster : MonoBehaviour
     bool isDead = false;
     private Animator anim;
 
-
     public GameObject weapon;
     //public List<Weapon> weapon = new List<Weapon>();
+
+    public void Init(int hp, int level, int dmg, int exp)
+    { 
+        hit = GetComponent<OnHit>();
+        hit.hp = hp;
+        hit.exp = exp;
+        this.Level = level;
+
+        melee = transform.GetChild(0).GetComponent<MeleeDamage>();
+        melee.Init(dmg);
+    }
 
     private void Start()
     {
@@ -82,6 +97,6 @@ public class Monster : MonoBehaviour
 
     public void Remove()
     {
-        MonsterSpawner.Instance.monsters.Remove(this);
+        MonsterSpawner.instance.monsters.Remove(this);
     }
 }

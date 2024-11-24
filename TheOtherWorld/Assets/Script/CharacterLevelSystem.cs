@@ -51,10 +51,10 @@ public class CharacterLevelSystem : MonoBehaviour
         
         LoadCharacterData();
     }
-    
-    
-    private List<CharacterData> characterDataList;
-    private CharacterData currentCharacter;
+
+
+    public List<CharacterData> characterDataList;
+    public CharacterData currentCharacter;
     private int currentExp = 0;
 
     private void LoadCharacterData()
@@ -64,9 +64,10 @@ public class CharacterLevelSystem : MonoBehaviour
         if (jsonFile != null)
         {
             string jsonString = jsonFile.text;
-            characterDataList = JsonUtility.FromJson<List<CharacterData>>(
+
+            characterDataList = JsonUtility.FromJson<Wrapper<CharacterData>>(
                 "{\"Items\":" + jsonString + "}"
-            ).ToList();
+            ).Items.ToList();
         }
         else
         {

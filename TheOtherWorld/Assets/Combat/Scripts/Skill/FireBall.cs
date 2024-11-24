@@ -11,7 +11,7 @@ public class FireBall : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
-        //Destroy(gameObject, 5.0f);
+        Destroy(gameObject, 10.0f);
     }
 
     void Update()

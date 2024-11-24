@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MonsterSpawner : MonoBehaviour
 {
@@ -15,29 +17,66 @@ public class MonsterSpawner : MonoBehaviour
     }
 
     public List<Monster> monsters = new List<Monster>();
+    public List<Image> images = new List<Image>();
 
     private PlayerController Player;
 
-    public GameObject enemyPrefab; // 생성할 적 프리팹
-    public Vector2 spawnAreaMin;  // 스폰 영역 최소값
-    public Vector2 spawnAreaMax;  // 스폰 영역 최대값
-    public int enemyCount = 5;    // 생성할 적 수
+    public GameObject[] enemyPrefab; // 생성할 적 프리팹
+    public GameObject[] spawnerPosition; // 스폰 위치
+
+    private int wave = 0;
+    private int maxWave = 5;
+    bool end = false;
 
     private void Start()
     {
         Player = PlayerManager.instance.Player;
-
-        SpawnEnemies();
+        SpawnEnemies(0);
     }
 
-    void SpawnEnemies()
+    private void Update()
     {
-        for (int i = 0; i < enemyCount; i++)
+        if (monsters.Count == 0)
         {
-            float randomX = Random.Range(spawnAreaMin.x, spawnAreaMax.x);
-            float randomY = Random.Range(spawnAreaMin.y, spawnAreaMax.y);
-            Vector3 spawnPosition = new Vector3(randomX, randomY, 0); // 2D 게임이라면 Z=0
-            Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+            if (end) return;
+            end = true;
+            wave++;
+
+            if (wave >= maxWave)
+            {
+                // 2라운드
+            }
+            else
+            { 
+                SpawnEnemies(wave);            
+            }
         }
     }
+
+    void SpawnEnemies(int spawnIndex)
+    {
+        for (int i = 0; i < spawnerPosition.Length; i++)
+        {
+            Monster instance = Instantiate(enemyPrefab[spawnIndex], spawnerPosition[i].transform.position, Quaternion.identity).GetComponent<Monster>();
+            monsters.Add(instance);
+
+            // 인디게이터 생성
+            //images 
+        }
+
+        end = false;
+    }
+
+    public void SpawnerEenemy(Monster prefab)
+    {
+        for (int i = 0; i < monsters.Count; i++)
+        {
+            if (monsters[i].GetInstanceID() == prefab.GetInstanceID())
+            {
+                monsters.Remove(monsters[i]);
+            }
+        }
+
+    }
+
 }

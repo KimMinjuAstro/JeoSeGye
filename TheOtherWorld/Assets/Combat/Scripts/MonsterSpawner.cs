@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,8 @@ using UnityEngine.UI;
 public class MonsterSpawner : MonoBehaviour
 {
     public static MonsterSpawner instance;
+
+    
 
     private void Awake()
     {
@@ -16,7 +19,7 @@ public class MonsterSpawner : MonoBehaviour
         }
     }
 
-
+    public TextMeshProUGUI text;
     public MonstersData monsterInfo;
     public List<Monster> monsters = new List<Monster>();
     public List<RectTransform> indicator = new List<RectTransform>();
@@ -28,7 +31,7 @@ public class MonsterSpawner : MonoBehaviour
     public GameObject[] spawnerPosition; // 스폰 위치
 
     private int wave = 0;
-    private int maxWave = 5;
+    private int maxWave = 30;
     bool end = false;
 
     private void Start()
@@ -54,6 +57,8 @@ public class MonsterSpawner : MonoBehaviour
                 SpawnEnemies(wave);            
             }
         }
+
+        text.text = monsters.Count.ToString() + "/ 10";
     }
 
     void SpawnEnemies(int spawnIndex)

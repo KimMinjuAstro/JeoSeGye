@@ -19,7 +19,8 @@ public class OnHit : MonoBehaviour
         if (hp <= 0)
         {
             if (GetComponent<Monster>() != null)
-            { 
+            {
+                MonsterSpawner.Instance.SpawnerEenemy(this.gameObject.GetComponent<Monster>());
                 Destroy(gameObject);
             }
 

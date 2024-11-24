@@ -79,4 +79,9 @@ public class Monster : MonoBehaviour
         weapon.GetComponent<Collider2D>().enabled = false;
         isAttack = false;
     }
+
+    public void Remove()
+    {
+        MonsterSpawner.Instance.monsters.Remove(this);
+    }
 }

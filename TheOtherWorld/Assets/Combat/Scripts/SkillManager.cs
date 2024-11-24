@@ -110,7 +110,7 @@ public class SkillManager : MonoBehaviour
 
             if (monsters.Length <= 0)
             {
-                Debug.Log("근처에 적이 없음");
+                //Debug.Log("근처에 적이 없음");
                 return;
             }
 
@@ -142,7 +142,7 @@ public class SkillManager : MonoBehaviour
 
             if (monsters.Length <= 0)
             {
-                Debug.Log("근처에 적이 없음");
+                //Debug.Log("근처에 적이 없음");
                 return;
             }
 
@@ -175,7 +175,7 @@ public class SkillManager : MonoBehaviour
 
             if (monsters.Length <= 0)
             {
-                Debug.Log("근처에 적이 없음");
+                //Debug.Log("근처에 적이 없음");
                 return;
             }
 
@@ -221,7 +221,7 @@ public class SkillManager : MonoBehaviour
 
             if (monsters.Length <= 0)
             {
-                Debug.Log("근처에 적이 없음");
+                //Debug.Log("근처에 적이 없음");
                 return;
             }
 
@@ -253,7 +253,7 @@ public class SkillManager : MonoBehaviour
 
             if (monsters.Length <= 0)
             {
-                Debug.Log("근처에 적이 없음");
+                //Debug.Log("근처에 적이 없음");
                 return;
             }
 
@@ -278,6 +278,8 @@ public class SkillManager : MonoBehaviour
 
         foreach (Monster target in monsters)
         {
+            if (target == null) break;
+
             float distance = Vector2.Distance(player.transform.position, target.transform.position);
             //Debug.Log($"몬스터: {target.name}, 거리: {distance}");
             if (distance < minDistance)
@@ -299,10 +301,12 @@ public class SkillManager : MonoBehaviour
             if (isWindStorm) return;
 
             isWindStorm = true;
+            StartCoroutine(WindStormEnd());
+
 
             if (monsters.Length <= 0)
             {
-                Debug.Log("근처에 적이 없음");
+                //Debug.Log("근처에 적이 없음");
                 return;
             }
 
@@ -316,14 +320,13 @@ public class SkillManager : MonoBehaviour
 
             windStormTimer = 0;
 
-            StartCoroutine(WindStormEnd());
         }
     }
 
     private IEnumerator IceFire2()
     {
         yield return new WaitForSeconds(.3f);
-        isFire = false;
+        isFire2 = false;
     }
 
     private IEnumerator IceEnd()
@@ -340,7 +343,7 @@ public class SkillManager : MonoBehaviour
 
     private IEnumerator WindStormEnd()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.2f);
         isWindStorm = false;
     }
 }

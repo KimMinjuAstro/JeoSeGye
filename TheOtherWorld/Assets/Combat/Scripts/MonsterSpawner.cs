@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MonsterSpawner : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class MonsterSpawner : MonoBehaviour
     }
 
     public List<Monster> monsters = new List<Monster>();
-
+    public List<Image> images = new List<Image>();
 
     private PlayerController Player;
 
@@ -58,6 +59,9 @@ public class MonsterSpawner : MonoBehaviour
         {
             Monster instance = Instantiate(enemyPrefab[spawnIndex], spawnerPosition[i].transform.position, Quaternion.identity).GetComponent<Monster>();
             monsters.Add(instance);
+
+            // 인디게이터 생성
+            //images 
         }
 
         end = false;

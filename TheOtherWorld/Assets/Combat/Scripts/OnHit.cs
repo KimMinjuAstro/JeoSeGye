@@ -21,6 +21,7 @@ public class OnHit : MonoBehaviour
         {
             if (GetComponent<Monster>() != null)
             {
+                SFXManager.instance.PlaySFX(4);
                 MonsterSpawner.instance.SpawnerEenemy(this.gameObject.GetComponent<Monster>());
                 DataManager.instance.AddExperience(exp);
                 Destroy(gameObject);

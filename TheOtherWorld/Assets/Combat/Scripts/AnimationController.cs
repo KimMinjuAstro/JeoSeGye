@@ -10,7 +10,7 @@ public class AnimationController : MonoBehaviour
     public GameObject baseAttack;
     //public 
     
-    public float baseAttackSpeed = 1f;
+    public float baseAttackSpeed = 2.5f;
     private float baseAttackTimer = 0f;
     private bool isAttack;
 

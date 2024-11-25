@@ -153,6 +153,8 @@ public class SkillManager : MonoBehaviour
         if (toromeTimer >= toromeDuration)
         {
             if (isTorome) return;
+            SFXManager.instance.PlaySFX(8);
+
 
             isTorome = true;
             StartCoroutine(ToromeEnd());
@@ -188,7 +190,9 @@ public class SkillManager : MonoBehaviour
 
         if (moonTimer >= moonDuration)
         {
+
             if (isMoon) return;
+            SFXManager.instance.PlaySFX(1);
 
             isMoon = true;
             StartCoroutine(MoonEnd());
@@ -232,6 +236,8 @@ public class SkillManager : MonoBehaviour
         {
             if (isFire) return;
 
+            SFXManager.instance.PlaySFX(3);
+
             isFire = true;
             StartCoroutine(FireEnd());
 
@@ -271,7 +277,7 @@ public class SkillManager : MonoBehaviour
         if (fire2Timer >= fire2Duration)
         {
             if (isFire2) return;
-
+            SFXManager.instance.PlaySFX(1);
             isFire2 = true;
             StartCoroutine(IceFire2());
 
@@ -327,7 +333,7 @@ public class SkillManager : MonoBehaviour
         if (iceTimer >= iceDuration)
         {
             if (isIce) return;
-
+            SFXManager.instance.PlaySFX(5);
             isIce = true;
             StartCoroutine(IceEnd());
 
@@ -388,6 +394,7 @@ public class SkillManager : MonoBehaviour
         {
             if (isWindStorm) return;
 
+            SFXManager.instance.PlaySFX(9);
             isWindStorm = true;
             StartCoroutine(WindStormEnd());
 

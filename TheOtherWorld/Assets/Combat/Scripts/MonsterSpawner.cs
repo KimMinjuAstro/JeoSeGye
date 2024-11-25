@@ -9,9 +9,7 @@ using UnityEngine.UI;
 public class MonsterSpawner : MonoBehaviour
 {
     public static MonsterSpawner instance;
-    public GameObject result;
-    public QuestPopUpHandler QuestPopUp;
-
+  
     private void Awake()
     {
         if (instance == null) 
@@ -55,7 +53,7 @@ public class MonsterSpawner : MonoBehaviour
             }
             else
             {
-                Invoke("Test", 5.0f);
+                Invoke("Test", .3f);
                 SpawnEnemies(wave);            
             }
         }

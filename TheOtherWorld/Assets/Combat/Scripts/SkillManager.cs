@@ -24,6 +24,15 @@ public class SkillManager : MonoBehaviour
     public bool iceArrow;          // 얼름 화살  
     public bool fireBall;          // 화이어볼 ??
 
+    [Header("다크")]
+    public GameObject toromePrefabs;
+    public Sprite toromeImage;
+    public float toromeDuration = 1.0f;
+    public float toromeTimer = 0.0f;
+    public bool isTorome = false;
+    public float toromeDmg = 10f;
+    public bool toromeImagebool = false;
+
     [Header("윈드")]
     public GameObject windStormPrefabs;
     public Sprite windStormImage;
@@ -51,14 +60,6 @@ public class SkillManager : MonoBehaviour
     public float iceDmg = 10f;
     public bool iceImagebool = false;
 
-    [Header("다크")]
-    public GameObject toromePrefabs;
-    public Sprite toromeImage;
-    public float toromeDuration = 1.0f;
-    public float toromeTimer = 0.0f;
-    public bool isTorome = false;
-    public float toromeDmg = 10f;
-    public bool toromeImagebool = false;
 
     [Header("파이어")]
     public GameObject firePrefabs;
@@ -199,8 +200,10 @@ public class SkillManager : MonoBehaviour
             }
 
             Monster monster = FindClosestTarget();
-
-            Vector2 direction = (monster.transform.position - player.transform.position).normalized;
+            Vector2 direction = Vector2.zero;
+            if (monster != null)
+                direction = (monster.transform.position - player.transform.position).normalized;
+            
             var go = Instantiate(moonPrefabs, player.transform.position, Quaternion.identity);
 
             // 발사체 회전 설정 (적 방향으로)

@@ -498,7 +498,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "A\uC138\uACC4\uC758 \uC2E0\uC774 \uBAAC\uC2A4\uD130\uB97C \uD1B5\uD574
-    B\uC138\uACC4\uB97C \uCE68\uACF5\uD558\uAE30 \uC2DC\uC791\uD588\uC2B5\uB2C8\uB2E4."
+    \uC8FC\uC778\uACF5 \uC138\uACC4\uB97C \uCE68\uACF5\uD558\uAE30 \uC2DC\uC791\uD588\uC2B5\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5f2ced7d6ccefa34e85aa805371ef25a, type: 2}
   m_sharedMaterial: {fileID: 1852871028702817188, guid: 5f2ced7d6ccefa34e85aa805371ef25a, type: 2}
@@ -537,7 +537,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 5.67
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

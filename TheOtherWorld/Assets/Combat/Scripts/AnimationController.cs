@@ -45,6 +45,7 @@ public class AnimationController : MonoBehaviour
         if (baseAttackTimer >= baseAttackSpeed)
         {
             baseAttackTimer = 0f;
+            SFXManager.instance.PlaySFX(0);
             anim.SetTrigger("isAttack");
         }
 

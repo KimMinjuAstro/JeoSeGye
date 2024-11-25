@@ -1270,12 +1270,19 @@ MonoBehaviour:
   image2: {fileID: 2069163603}
   image3: {fileID: 1236837418}
   image4: {fileID: 1746303712}
-  windStorm: 0
+  windStorm: 1
   moon: 1
   darknessExplosion: 0
-  fireArrow: 0
-  iceArrow: 0
+  fireArrow: 1
+  iceArrow: 1
   fireBall: 0
+  toromePrefabs: {fileID: 6722778453397133709, guid: 91523079aa9dacf4e89565f4abd00d72, type: 3}
+  toromeImage: {fileID: 21300000, guid: 9d5356b9b3a094d419cd402e9d038169, type: 3}
+  toromeDuration: 1
+  toromeTimer: 0
+  isTorome: 0
+  toromeDmg: 10
+  toromeImagebool: 0
   windStormPrefabs: {fileID: 3276315854339165819, guid: 8233082ef19cea24890c78aa273e3f27, type: 3}
   windStormImage: {fileID: 21300000, guid: 9e6f3d05a377d9c46b649d37d93af1c3, type: 3}
   windStormDuration: 2
@@ -1297,13 +1304,6 @@ MonoBehaviour:
   isIce: 0
   iceDmg: 10
   iceImagebool: 0
-  toromePrefabs: {fileID: 6722778453397133709, guid: 91523079aa9dacf4e89565f4abd00d72, type: 3}
-  toromeImage: {fileID: 21300000, guid: 9d5356b9b3a094d419cd402e9d038169, type: 3}
-  toromeDuration: 1
-  toromeTimer: 0
-  isTorome: 0
-  toromeDmg: 10
-  toromeImagebool: 0
   firePrefabs: {fileID: 3602400706418099826, guid: 3e7030e7b2cf07049b3d21289e5c3234, type: 3}
   fireImage: {fileID: 21300000, guid: f2153b6be7a117b4c91e873730acec3a, type: 3}
   fireDuration: 2
@@ -1882,7 +1882,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 50, y: -50}
-  m_SizeDelta: {x: 500, y: 50}
+  m_SizeDelta: {x: 1000, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &861054488
 MonoBehaviour:
@@ -3763,6 +3763,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0702da0669d5beb40bd4ad170cd327b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  result: {fileID: 1274979243070057221}
+  QuestPopUp: {fileID: 7976953956190824127}
   text: {fileID: 1484459905}
   monsterInfo: {fileID: 11400000, guid: c213cf10cc560b94d84565804e01eb45, type: 2}
   monsters: []
@@ -16223,6 +16225,7 @@ GameObject:
   - component: {fileID: 2759780793421996653}
   - component: {fileID: 1854030619819617697}
   - component: {fileID: 2875917467529455765}
+  - component: {fileID: 2875917467529455766}
   m_Layer: 5
   m_Name: UI Canvas 1
   m_TagString: Untagged
@@ -17653,6 +17656,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2875917467529455766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2462549638317003027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdd9e9486e1d5704987def38e5e301db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questPopUp: {fileID: 7976953956190824127}
+  ClearButton: {fileID: 1274979243070057221}
 --- !u!1001 &2909315383846142926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18614,6 +18631,7 @@ MonoBehaviour:
   totalLevel: 0
   currentLevel: 1
   currentTier: 0
+  textMeshProUGUIs: []
 --- !u!1001 &3209790013126119103
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34986,7 +35004,6 @@ MonoBehaviour:
   giftPopUpWindow: {fileID: 7107777543271511977}
   questWindow: {fileID: 7976953956190824127}
   questTitle: {fileID: 2626860086851250249}
-  questTitle2: {fileID: 861054488}
   questDetail: {fileID: 6900554226492767900}
   giftNum: {fileID: 2384117052852477487}
   clearButton: {fileID: 9036407269529734606}

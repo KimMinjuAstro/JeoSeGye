@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,8 +9,8 @@ using UnityEngine.UI;
 public class MonsterSpawner : MonoBehaviour
 {
     public static MonsterSpawner instance;
-
-    
+    public GameObject result;
+    public QuestPopUpHandler QuestPopUp;
 
     private void Awake()
     {
@@ -53,12 +54,25 @@ public class MonsterSpawner : MonoBehaviour
                 // 2¶ó¿îµå
             }
             else
-            { 
+            {
+                Invoke("Test", 5.0f);
                 SpawnEnemies(wave);            
             }
         }
 
         text.text = monsters.Count.ToString() + "/ 10";
+
+        if (monsters.Count <= 0)
+        {
+            //Time.timeScale = 
+
+            //result.gameObject.SetActive(true);
+        }
+    }
+
+    public void Test()
+    {
+        UIManager.Instance.Show();
     }
 
     void SpawnEnemies(int spawnIndex)
